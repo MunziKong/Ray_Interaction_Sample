@@ -8,7 +8,6 @@ public class SlotUI : MonoBehaviour
     [SerializeField] private Image _icon;
     [SerializeField] private TextMeshProUGUI _amount;
 
-    private int _slotIndex;
 
     public void SetSlot(Slot slot)
     {
