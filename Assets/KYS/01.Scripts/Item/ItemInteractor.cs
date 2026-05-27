@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,13 +13,17 @@ public class ItemInteractor : MonoBehaviour
 
     // 아이템 설명 UI 컨트롤러
     [SerializeField] private ItemDescriptionUI descriptionUI;
+    
 
     private Camera _mainCamera;
     private ItemObject _currentTarget;
 
+    private PlayerInventory _inventory;
+
     private void Awake()
     {
         _mainCamera = Camera.main;
+        _inventory = GetComponent<PlayerInventory>();
     }
 
     private void Update()
@@ -81,6 +86,7 @@ public class ItemInteractor : MonoBehaviour
         }
 
         _currentTarget.PickUp();
+        _inventory.AddItem(_currentTarget.Data);
         _currentTarget = null;
         descriptionUI.Hide();
     }
