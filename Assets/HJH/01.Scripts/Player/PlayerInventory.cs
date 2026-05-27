@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerInventory : MonoBehaviour
 {
@@ -21,32 +22,32 @@ public class PlayerInventory : MonoBehaviour
     
     void ToggleInventoryUI()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Keyboard.current.iKey.wasPressedThisFrame)
         {
             ToggleInventoryUIEvent?.Invoke();
         }
     }
 
-    // public void AddItem(ItemData itemData)
-    // {
-    //     for (int i = 0; i < _slots.Count; i++)
-    //     {
-    //         if (_slots[i].itemData.itemId == itemData.itemId)
-    //         {
-    //             _slots[i].amount += 1;
+    public void AddItem(ItemData itemData)
+    {
+        for (int i = 0; i < _slots.Count; i++)
+        {
+            if (_slots[i].itemData.itemName == itemData.itemName)
+            {
+                _slots[i].amount += 1;
 
-    //             OnInventoryChanged?.Invoke();
-    //             return;
-    //         }
-    //     }
+                OnInventoryChanged?.Invoke();
+                return;
+            }
+        }
 
-    //     Slot newSlot = new Slot
-    //     {
-    //         itemData = itemData,
-    //         amount = amount
-    //     };
+        Slot newSlot = new Slot
+        {
+            itemData = itemData,
+            amount = 1
+        };
 
-    //     _slots.Add(newSlot);
-    //     OnInventoryChanged?.Invoke();
-    // }
+        _slots.Add(newSlot);
+        OnInventoryChanged?.Invoke();
+    }
 }

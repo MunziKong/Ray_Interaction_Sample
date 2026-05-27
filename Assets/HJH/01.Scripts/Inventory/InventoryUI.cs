@@ -72,7 +72,7 @@ public class InventoryUI : MonoBehaviour
         {
             if (i < slots.Count && slots[i].amount > 0)
             {
-                // _slotUIs[i].SetSlot(slots[i]);
+                _slotUIs[i].SetSlot(slots[i]);
             }
             else
             {
